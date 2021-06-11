@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+{% block stylesheets %}
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href='{{asset("assets/icomoon/style.css")}}'>
+	<script src='{{asset("assets/jsLogin/jquery-3.3.1.min.js")}}'></script>
+	<script src='{{asset("assets/jsLogin/popper.min.js")}}'></script>
+	<script src='{{asset("assets/jsLogin/bootstrap.min.js")}}'></script>
+	<script src='{{asset("assets/jsLogin/main.js")}}'></script>
+
+	<link
+	rel="stylesheet" href='{{asset("assets/cssLogin/owl.carousel.min.css")}}'>
+
+	<!-- Bootstrap CSS -->
+	<link
+	rel="stylesheet" href='{{asset("assets/cssLogin/bootstrap.min.css")}}'>
+
+	<!-- Style -->
+	<link rel="stylesheet" href='{{asset("assets/cssLogin/style.css")}}'>
+{% endblock %}
+{% block body %}
+
+
+	<body>
+
+		<div class="content">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-6">
+						<img src='{{asset("assets/images/in_progress_ql66.svg")}}' alt="Image" class="img-fluid">
+					</div>
+					<div class="col-md-6 contents">
+						<div class="row justify-content-center">
+							<div class="col-md-8">
+								<div class="mb-4">
+									<h3>Edit Account</h3>
+									<p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
+								</div>
+								{{ form_start(editForm) }}
+								{% for flashError in app.flashes('verify_email_error') %}
+									<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+								{% endfor %}
+								<div class="form-group first">
+
+									{{ form_row(editForm.name) }}
+								</div>
+								<div class="form-group">
+									{{ form_row(editForm.about) }}
+								</div>
+								<div class="form-group">
+
+									{{ form_row(editForm.img) }}
+								</div>
+
+
+								<button type="submit" class="btn btn-success">Edit</button>
+								{{ form_end(editForm) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</body>
+		</html>
+	</body>
+</div></body></html></div>{% endblock %}

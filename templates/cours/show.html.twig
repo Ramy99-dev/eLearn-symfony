@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design Bootstrap</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="{{ asset('assets/cssCours/css/bootstrap.min.css')}}"  rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="{{ asset("assets/cssCours/css/mdb.min.css")}}"  rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="{{ asset("assets/cssCours/css/style.min.css")}}"  rel="stylesheet">
+  
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <!-- Brand -->
+      <a href="{{path('home')}}"><img style='height:100px;width:100px;width:60px;height:60px' src='{{asset("assets/images/ELearn.png")}}' width="30" height="30" alt=""></a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link waves-effect" href="#">Home
+           
+            </a>
+          </li>
+         
+        </ul>
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          <li class="nav-item">
+            <a class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1"> 1 </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!--Main layout-->
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div style="display:inline-block" class="col-md-6 mb-4">
+          <img style="width:280px;height:280px" src="\uploads\{{ cour.img }}" class="img-fluid" alt="">
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+          <!--Content-->
+          <div class="p-4">
+             <h4>{{cour.nom}}</h4>
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">{{cour.categorie.categorie}}</span>
+              </a>
+              
+            </div>
+            <a href="{{path('cours_like',{'id':cour.id})}}" class="js-like">
+            <i id="icon" class="fas fa-chevron-up"></i>
+             <span id="js-likes">{{cour.likes|length}}</span>
+            </a>
+            <p class="lead">
+            {% if cour.price != 0 %}
+              <span>{{cour.price}}DT</span>
+            {% else %}
+            <span>Free</span>
+            {% endif %}
+            </p>
+
+            <p class="lead font-weight-bold">Description</p>
+              {% if cour.description == null %}
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
+              sint voluptatibus!
+              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
+             {% else %}
+             <p><p>{{cour.description}}</p></p>
+             {% endif %}
+            <form class="d-flex justify-content-left">
+              <!-- Default input -->
+      
+             <button class="btn btn-primary btn-md my-0 p" type="submit"><a style="color:white" href="{{path('panier_add',{'id':cour.id})}}">Buy
+                <i class="fas fa-shopping-cart ml-1"></i></a>
+              </button>
+
+            </form>
+
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <hr>
+
+     
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="{{ asset('assets/cssCours/js/jquery-3.4.1.min.js')}}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{{ asset('assets/cssCours/js/popper.min.js')}}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{{ asset('assets/cssCours/js/bootstrap.min.js')}}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{{ asset('assets/cssCours/js/bootstrap.min.js')}}"></script>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+      const icon = document.getElementById('icon');
+      document.querySelectorAll('a.js-like').forEach(function(link){
+        link.addEventListener('click' , function(e){
+            e.preventDefault();
+            console.log(icon.classList)
+            if(icon.classList.contains('fa-chevron-up'))
+            {
+    
+              icon.classList.replace('fa-chevron-up','fa-chevron-down')
+            }
+            else{
+              icon.classList.replace('fa-chevron-down','fa-chevron-up')
+            }
+            const url = this.href;
+            axios.get(url).then(function(res){
+              document.getElementById('js-likes').textContent=res.data.likes;
+              
+            })
+        })
+      })
+
+  </script>
+</body>
+
+</html>
